@@ -380,7 +380,7 @@ these are available in this guide [# Register your machines and assign permissio
     - The Azure policies aren't blocking the creation of certain resource types in a resource group.
     - The Azure policies aren't blocking the resource deployment in certain locations.
 
-Now you can run the script below to register the machine. You need to go need to find a few things in your azure portal.
+Now you can run the script below to register the machine. You need to find a few things in your azure portal.
 
 ## Find your Azure subscription
 
