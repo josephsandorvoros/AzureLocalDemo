@@ -199,9 +199,9 @@ Locations for things
 
 Next we have the variables you can change if you would like to call them something other than what is outlined.
 
-	- Node(n) (if you are creating more than one node you have to adjust this or at the least the number for each node you create)
-	- NIC(n)
-	- ip address (xxx.xxx.xxx.xxx)
+- Node(n) (if you are creating more than one node you have to adjust this or at the least the number for each node you create)
+- NIC(n)
+- ip address (xxx.xxx.xxx.xxx)
 
 ## On The Host node
 
@@ -408,7 +408,7 @@ Follow these steps to retrieve the ID for a Microsoft Entra tenant in the Azure 
     
 5. Copy the **Tenant ID** by selecting the **Copy to clipboard** icon shown next to it. You can paste this value into a text document or other location.
 
-Create a resource group in a region that supports Azure Local
+## Create a resource group in a region that supports Azure Local
 
 To create a resource group in the [Azure portal](https://www.google.com/search?sca_esv=ea7911cd1c52328e&cs=1&q=Azure+portal&sa=X&ved=2ahUKEwj25v-F85CMAxUP4ckDHaRvMbgQxccNegQIAxAB&mstk=AUtExfBJ9AnUmF8cNByWLe3ZvafIRgO49_aYC8A3Dgz4_X4kTBXnoxxulgtmJYffpocE0QGKWPmrQzSl8Jm8fhILTCRp9LAMTS2jrdIKoUgXJc351EM3lsIurtmNNsvhjSj5KkK85u8Ji2MpXzH7SajDXi8PEVgYSM4iSyARu-bJjnxzAO0i0PaRCN2JO4hHgGIhUw1mEpNEzF0_vFZYf2irxgIuf4Vo4qA-AKMxMlciekLBpQ&csui=3), sign in, navigate to "Resource groups," click "+ Create," select your subscription, enter a name and region, then click "Review + create" and "Create". 
 
@@ -432,7 +432,7 @@ Here's a more detailed step-by-step guide:
 	- Click "Review + create" to review the details.
 	- Click "Create" to create the resource group.
 
-**Azure regions: Azure Local is supported for the following regions:** (I have formatted them to work below)
+## **Azure regions: Azure Local is supported for the following regions:** (I have formatted them to work below)
 
 - eastus
 - westeurope
