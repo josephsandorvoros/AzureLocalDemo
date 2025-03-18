@@ -3,7 +3,7 @@
 
 - [Introduction](#intro)
 	- [Know your Local IP information](#know-your-local-ip-information)
-	- [Deploy AD/DNS](#deploy-the-ad/dns-server)
+	- [Deploy AD/DNS](#deploy-the-ad-dns-server)
 		- [Set Uniform Time](#set-uniform-time-for-all-machines)
 		- [Prepare Active directory](#prepare-active-directoy)
 	- [Host node and VM node requirements](#make-sure-your-host-node-meets-these-requirements)
