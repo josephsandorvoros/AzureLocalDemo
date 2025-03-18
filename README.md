@@ -144,7 +144,9 @@ w32tm /query /status
 Follow the guide, do the perquisites...feel free to read it a few times
 
 [Deploy Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/deploy/deployment-introduction?view=azloc-24112)
+
 [Deploy a virtual Azure Local System](https://learn.microsoft.com/en-us/azure/azure-local/deploy/deployment-virtual?view=azloc-24113)
+
 [Alternative guide](https://www.linkedin.com/pulse/building-my-first-azure-local-aka-stack-hci-cluster-home-pomato-6gdqf/)
 
 ## Prepare Active directory
