@@ -22,6 +22,7 @@
 		- [Manage your Cluster in WAC](#finally-to-add-the-cluster)
 - [Is that all Folks?](#is-that-all-folks)
 
+
 ## Intro
 
 Create and register Azure Local Node (VM version)
@@ -37,6 +38,7 @@ I am starting this as if you have no AD/DNS DC set up. I am running this on two 
 I created this guide using markdown and put the code into blocks with notes. that means you can copy a codeblock into any text editor and edit it to your needs then just copy paste that into an elevated powershell instance. I have also tried to call out where you need to run what as that initially caused me some confusion. 
 
 Anyway enough about me lets get into the project.
+
 
 
 ## Know your Local IP information
@@ -72,6 +74,8 @@ your Default Gateway will be
 and your router is the DNS server (or it is resolving to one somewhere)
 
 This is important info for later
+
+
 
 ## Deploy the AD DNS server
 
@@ -128,6 +132,9 @@ Here's a more detailed breakdown:
     
     Ensure that your domain controller is configured to synchronize time with a reliable time source.
 
+
+
+
 ## Set Uniform time for all machines
 
 Make sure all machines are syncing from the windows timeserver, You can use Powershell to do this easily with the code below.
@@ -148,6 +155,9 @@ Follow the guide, do the perquisites...feel free to read it a few times
 [Deploy a virtual Azure Local System](https://learn.microsoft.com/en-us/azure/azure-local/deploy/deployment-virtual?view=azloc-24113)
 
 [Alternative guide](https://www.linkedin.com/pulse/building-my-first-azure-local-aka-stack-hci-cluster-home-pomato-6gdqf/)
+
+
+
 
 ## Prepare Active Directory
 
@@ -173,10 +183,13 @@ New-HciAdObjectsPreCreation -AzureStackLCMUserCredential (Get-Credential) -AsHci
 In case again like me you are new to this an example of a formal OU name would be "OU=ASHCI,DC=AzurelocalDC,DC=aztest" Assuming you have a domain that is AzurelocalDC.aztest 
 
 
+
+
+
 ## Make sure your host node meets these requirements
 
 
-### Physical host requirements
+#### Physical host requirements
 
 The following are the minimum requirements to successfully deploy Azure Local.
 
@@ -195,7 +208,7 @@ Before you begin, make sure that:
 | Host network adapters | A single network adapter.                                                                                                                                                                                                                                                                                                                      |
 | Storage               | 1 TB Solid state drive (SSD).                                                                                                                                                                                                                                                                                                                  |
 
-### Virtual host requirements
+#### Virtual host requirements
 
 Before you begin, make sure that each virtual host system can dedicate the following resources to provision your virtualized Azure Local instance:
 
@@ -209,6 +222,8 @@ Before you begin, make sure that each virtual host system can dedicate the follo
 | Hard disks for Storage Spaces Direct | Four dynamic expanding disks. Maximum disk size is 1024 GB.                                |
 | Data disks                           | At least 127 GB each. The size must be the same for each disk                              |
 | Time synchronization in integration  | Disabled.                                                                                  |
+
+
 
 
 ## Now to run some code to create the VMs for us and register our node
@@ -408,6 +423,8 @@ these are available in this guide [# Register your machines and assign permissio
 
 Now you can run the script below to register the machine. You need to go need to find a few things in your azure portal.
 
+
+
 ## Find your Azure subscription
 
 Follow these steps to retrieve the ID for a subscription in the Azure portal.
@@ -419,6 +436,8 @@ Follow these steps to retrieve the ID for a subscription in the Azure portal.
 3. Find the subscription in the list, and note the **Subscription ID** shown in the second column. If no subscriptions appear, or you don't see the right one, you may need to [switch directories](https://learn.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories) to show the subscriptions from a different Microsoft Entra tenant.
     
 4. To easily copy the **Subscription ID**, select the subscription name to display more details. Select the **Copy to clipboard** icon shown next to the **Subscription ID** in the **Essentials** section. You can paste this value into a text document or other location.
+
+
 
 ## Find your Microsoft Entra tenant
 
@@ -468,6 +487,8 @@ Here's a more detailed step-by-step guide:
 - canadacentral
 - japaneast
 - southcentralus
+
+
 
 ## On Local Node
 
@@ -527,15 +548,16 @@ Now assign permissions for deployment
 6. In the Azure portal go to **Microsoft Entra Roles and Administrators** and assign the **Cloud Application Administrator** role permission at the Microsoft Entra tenant level.
 
 
+
 ## Now you are registered and ready to deploy
 
 If you followed through this point you should be registered with a node that is available in the Azure > Azure ARC > Azure Local > Deploy Azure Local workflow. 
 
 You can deploy using this guide and follow it all the way do the bottom to the enable RDP portion because you'll need that for the next couple of parts.
 
-## [Deploy Azure Local using the Azure portal](https://learn.microsoft.com/en-us/azure/azure-local/deploy/deploy-via-portal?view=azloc-24112)
+#### [Deploy Azure Local using the Azure portal](https://learn.microsoft.com/en-us/azure/azure-local/deploy/deploy-via-portal?view=azloc-24112)
 
-## Validated network topologies (its going to have a visual for you)
+#### Validated network topologies (its going to have a visual for you)
 
 When you deploy Azure Local from Azure portal, the network configuration options vary depending on the number of machines and the type of storage connectivity. Azure portal guides you through the supported options for each configuration.
 
@@ -559,9 +581,11 @@ The two storage network options are:
 - **Network switch for storage**. When you select this option, your Azure Local system uses network switches connected to your network interfaces for storage communication. You can deploy up to 16 machines using this configuration.
 
 
+
 ## Now you have an Azure Local Cluster now what?
 
 Now you should have a cluster with a management name for the cluster. In my case I chose JSVS2D so I'll use this as the frame of reference for example but yours is whatever you named it in the deployment process. The registration process created a resource group for you, and the deployment process added your cluster to that resource group with all the required things it needs. You have to add one more thing to do other things in your cluster.  You need to create a logical network. This will allow the VMs and containers you run to interact withing the cluster and with the outside world. 
+
 
 
 ## Add a logical network to your cluster
@@ -582,17 +606,23 @@ So if your IP address is 192.168.95.201 you would add 192.168.95.1/24 as your sp
 
 Now that we have that done you can begin to install VMs on your cluster. But first we want to walk through a VM to set up WAC on to manage it and give you a starting idea for how to do more.
 
+
+
 ## Setting up a Windows Server VM on Azure Local
 
 First you want to go to your resource group and click into your cluster > resources > VM images > add VM image from that menu you can add an iso if you have one or download one from the marketplace. If you get one from the marketplace just make sure it isn't core, you want a GUI.
 
 Once that is downloaded you want to go back to your cluster > resources > virtual machines > create a vm from there you can set it up like any VM Give it a username and password, chose to atomically join your domain and it will create it on your cluster.
 
+
+
 ## Setting up RDP
 
 We are finally ready to set up RDP. For easy mode you want this to be on a PC in your domain. Download the RDP app from Microsoft app store, and sign in with your Azure subscription account. (if you are like me and this isn't a corporate account you'll need to look up the long form account user name. You can find this by going to your subscription > access control (IAM) > role assignments > your account (it will be in several places where you have given it permissions) > there you can see the long username...that is what you need to sign into RDP). 
 
 Once signed in you can add pc's I used the IP address of the windows server we just created. Then add it and connect using your credentials.
+
+
 
 ## Congratulations you should now be in your cluster and in the server now to set up WAC
 
@@ -614,9 +644,13 @@ The output will look something like this
 
 This will spit out a username and SID for you and that username is the username WAC is looking for. The password is just the password for the login to the server.
 
+
+
 ## Finally to add the cluster
 
 Since WAC is a gateway and in your AD Domain adding server running on it is easy enough, you can click the add server button and then search active directory and then use a wildcard * to see all available servers but what about adding a cluster. When you created the cluster you created a resource that managed the cluster as a whole in Azure. This same name was applied to your AD OU and so now you have cluster in your AD by that name. In my case JSVS2D. So you click add cluster, search for yours, then use your AD credentials (the full ones blank@blank.blank) and password to log into that and you are off to the races, managing your cluster in WAC.
+
+
 
 # Is that all folks?
 
