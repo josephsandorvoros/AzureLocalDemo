@@ -1,6 +1,29 @@
 # AzureLocalDemo
-Create and register Azure Local Node (VM version)
 
+- [Introduction](#intro)
+	- [Know your Local IP information](#know-your-local-ip-information)
+	- [Deploy AD/DNS](deploy-the-ad/dns-server)
+	- [Set Uniform Time(before-you-start,-make-sure-your-host/ad-dns-server/vm-are-all-using-time.windows.com-for-clock-and-not-the-cmos)
+	- Prepare Active directory
+	- Make sure your host node meets these requirements
+	- Now to run some code to create the VMs for us and register our node
+	- On The Host node
+	- Set these permissions first
+	- Find your Azure subscription
+	- Find your Microsoft Entra tenant
+	- On Local Node
+	- Now you are registered and ready to deploy
+- Now you have an Azure Local Cluster...now what?
+	- Add a logical network to your cluster
+	- Setting up a Windows Server VM on Azure Local
+	- Setting up RDP
+	- Congratulations you should now be in your cluster and in the server...Now to set up WAC
+	- Finally to add the cluster
+- Is that all folks?
+
+## Intro
+
+Create and register Azure Local Node (VM version)
 
 Hello and welcome to my "this has been done before but I struggled quite a bit so I want to try to help you with something that includes all the things I missed and steps that make sense to me" guide to deploying a virtual Azure Local edge node/cluster to try it out and get a feel for the setup/management etc.
 
