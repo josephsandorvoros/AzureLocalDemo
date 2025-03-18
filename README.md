@@ -14,11 +14,11 @@
 		- [Get your Tenant](#find-your-microsoft-entra-tenant)
 		- [Register the Node](#on-local-node)
 		- [Time to Deploy](#now-you-are-registered-and-ready-to-deploy)
-	- [Now you have a Cluster, lets put it to Work](#now-you-have-an-azure-local-cluster...now-what?)
+	- [Now you have a Cluster, lets put it to Work](#now-you-have-an-azure-local-cluster-now-what?)
 		- [Set up Logical Network](#add-a-logical-network-to-your-cluster)
 		- [Your first Azure Local VM](#setting-up-a-windows-server-vm-on-azure-local)
 		- [Add RDP](#setting-up-rdp)
-		- [Set Up Windows Admin Center](#congratulations-you-should-now-be-in-your-cluster-and-in-the-server...now-to-set-up-wac)
+		- [Set Up Windows Admin Center](#congratulations-you-should-now-be-in-your-cluster-and-in-the-server-now-to-set-up-wac)
 		- [Manage your Cluster in WAC](#finally-to-add-the-cluster)
 - [Is that all Folks?](#is-that-all-folks)
 
@@ -559,7 +559,7 @@ The two storage network options are:
 - **Network switch for storage**. When you select this option, your Azure Local system uses network switches connected to your network interfaces for storage communication. You can deploy up to 16 machines using this configuration.
 
 
-## Now you have an Azure Local Cluster...now what?
+## Now you have an Azure Local Cluster now what?
 
 Now you should have a cluster with a management name for the cluster. In my case I chose JSVS2D so I'll use this as the frame of reference for example but yours is whatever you named it in the deployment process. The registration process created a resource group for you, and the deployment process added your cluster to that resource group with all the required things it needs. You have to add one more thing to do other things in your cluster.  You need to create a logical network. This will allow the VMs and containers you run to interact withing the cluster and with the outside world. 
 
@@ -594,7 +594,7 @@ We are finally ready to set up RDP. For easy mode you want this to be on a PC in
 
 Once signed in you can add pc's I used the IP address of the windows server we just created. Then add it and connect using your credentials.
 
-## Congratulations you should now be in your cluster and in the server...Now to set up WAC
+## Congratulations you should now be in your cluster and in the server now to set up WAC
 
 We are almost there From this point we just need to set up WAC. For this in the browser navigate to the **[evaluation center](https://www.microsoft.com/en-us/evalcenter/download-windows-admin-center)** We've been here before. Download Windows admin center and install it. Since it's running on a server it is going to assume the role of a gateway server for WAC which offers more flexibility and the ability to add your cluster. You need to be able to log in though. If you have never done it before it took me a minute to figure it out. The easy way is to open powershell and use this command
 
@@ -625,4 +625,12 @@ That is where I'll end this guide. From this point on you know how to add VM ima
 Now that you see how easy it is once everything is set up you can do it on the full blown version as well by acquiring validated hardware from a Microsoft approved OEM vendor [Azure Local Catalogue and sizer](https://azurelocalsolutions.azure.microsoft.com/).
 
 I hope this guide helps, and wish you a good journey in your Azure Local adventures.
+
+
+
+
+
+
+
+
 
