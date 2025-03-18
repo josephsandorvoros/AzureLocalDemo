@@ -1,25 +1,26 @@
 # AzureLocalDemo
 
+
 - [Introduction](#intro)
 	- [Know your Local IP information](#know-your-local-ip-information)
-	- [Deploy AD/DNS](#deploy-the-ad-dns-server)
-	- [Set Uniform Time](#before-you-start,-make-sure-your-host/ad-dns-server/vm-are-all-using-time.windows.com-for-clock-and-not-the-cmos)
-	- Prepare Active directory
-	- Make sure your host node meets these requirements
-	- Now to run some code to create the VMs for us and register our node
-	- On The Host node
-	- Set these permissions first
-	- Find your Azure subscription
-	- Find your Microsoft Entra tenant
-	- On Local Node
-	- Now you are registered and ready to deploy
-- Now you have an Azure Local Cluster...now what?
-	- Add a logical network to your cluster
-	- Setting up a Windows Server VM on Azure Local
-	- Setting up RDP
-	- Congratulations you should now be in your cluster and in the server...Now to set up WAC
-	- Finally to add the cluster
-- Is that all folks?
+	- [Deploy AD/DNS](#deploy-the-ad/dns-server)
+		- [Set Uniform Time](#set-uniform-time-for-all-machines)
+		- [Prepare Active directory](#prepare-active-directoy)
+	- [Host node and VM node requirements](#make-sure-your-host-node-meets-these-requirements)
+	- [Create and register Nodes](#now-to-run-some-code-to-create-the-vms-for-us-and-register-our-node)
+		- [Create the VM](#on-the-host-node)
+		- [Set permissions](#set-these-permissions-first)
+		- [Get your Subscription](#find-your-azure-subscription)
+		- [Get your Tenant](#find-your-microsoft-entra-tenant)
+		- [Register the Node](#on-local-node)
+		- [Time to Deploy](#now-you-are-registered-and-ready-to-deploy)
+	- [Now you have a Cluster, lets put it to Work](#now-you-have-an-azure-local-cluster...now-what?)
+		- [Set up Logical Network](#add-a-logical-network-to-your-cluster)
+		- [Your first Azure Local VM](#setting-up-a-windows-server-vm-on-azure-local)
+		- [Add RDP](#setting-up-rdp)
+		- [Set Up Windows Admin Center](#congratulations-you-should-now-be-in-your-cluster-and-in-the-server...now-to-set-up-wac)
+		- [Manage your Cluster in WAC](#finally-to-add-the-cluster)
+- [Is that all Folks?](#is-that-all-folks?)
 
 ## Intro
 
@@ -29,7 +30,7 @@ Hello and welcome to my "this has been done before but I struggled quite a bit s
 
 I set out on this project because I knew it was possible and because, while I have been selling Azure Local (under several names now), I have not had any real experience setting up-deploying-managing a node/cluster hands on. This was a chance for me to do it on my own and stumble through and learn. Some people learn how I do...in which case I would say maybe use this as a guide path, but go learn on your own you'll love it. Some people just want to get up and running and good documentation with a clear path through the pages and pages Microsoft has available can be the thing that makes the experience a nice one rather than a daunting task.
 
-Either way, this guide is my attempt to make sense for me, and even though I know there are several others out there, maybe help make sense of the process for you too. It is laid out as if you are new to all of this, because I am and I started from scratch here. I did have some networking knowledge coming into this I am trying to not make the assumption you do, and hopefully wont miss any notation you need. With that in mind, if you have something in place already feel free to skip on down to a later part if the process. Also, I make little to no claim to the code and large portions of the text in this guide. This is a compilation of steps from other guides (I have linked them throughout) and then me trying to lay it out in a full start to finish path with my notes around it.
+Either way, this guide is my attempt to make sense for me, and even though I know there are several others out there, maybe help make sense of the process for you too. It is laid out as if you are a noob, because I am and I started from scratch here. I did have some networking knowledge coming into this I am trying to not make the assumption you do, and hopefully wont miss any notation you need. With that in mind, if you have something in place already feel free to skip on down to a later part if the process. 
 
 I am starting this as if you have no AD/DNS DC set up. I am running this on two pieces of hardware, a small NAS  with an intel N100 - 16GB of memory - and 2.5GB NIC that I set up to run a VM with Windows server to be my AD/DNS server and a small micro PC with an AMD Ryzen 7 5825U - 64GB of memory - 2TB of NVME SSD and 2.5GB NIC. I am leaving names of manufactures out of this guide to be neutral but providing relevant information to help you make hardware decisions if you need to. All in my solution here cost less than $1000.00 The is a small switch, the NAS, the mini PC, and memory and hard drive upgrades for the NAS and Mini PC. My router is just from my internet provider. So nothing is super fancy here, and all of it can be used for more. I am running a small home lab, hosting a game server, running some containers for home automation. That is all to say you can use this hardware for multiple things if you need to buy new and need a reason other than "I want to try Azure Local".
 
@@ -72,7 +73,7 @@ and your router is the DNS server (or it is resolving to one somewhere)
 
 This is important info for later
 
-## Deploy the AD DNS server
+## Deploy the AD/DNS server
 
 On the NAS or some other node external to what will be your cluster start a VM running Windows server.
 
@@ -127,9 +128,9 @@ Here's a more detailed breakdown:
     
     Ensure that your domain controller is configured to synchronize time with a reliable time source.
 
-## Before you start, make sure your host/AD-DNS server/VM are all using time.windows.com for clock and not the CMOS
+## Set Uniform time for all machines
 
-you can use powershell to do this easily
+Make sure all machines are syncing from the windows timeserver, You can use Powershell to do this easily with the code below.
 
 ``` Powershell
 
@@ -143,9 +144,7 @@ w32tm /query /status
 Follow the guide, do the perquisites...feel free to read it a few times
 
 [Deploy Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/deploy/deployment-introduction?view=azloc-24112)
-
 [Deploy a virtual Azure Local System](https://learn.microsoft.com/en-us/azure/azure-local/deploy/deployment-virtual?view=azloc-24113)
-
 [Alternative guide](https://www.linkedin.com/pulse/building-my-first-azure-local-aka-stack-hci-cluster-home-pomato-6gdqf/)
 
 ## Prepare Active directory
@@ -224,9 +223,9 @@ Locations for things
 
 Next we have the variables you can change if you would like to call them something other than what is outlined.
 
-- Node(n) (if you are creating more than one node you have to adjust this or at the least the number for each node you create)
-- NIC(n)
-- ip address (xxx.xxx.xxx.xxx)
+	- Node(n) (if you are creating more than one node you have to adjust this or at the least the number for each node you create)
+	- NIC(n)
+	- ip address (xxx.xxx.xxx.xxx)
 
 ## On The Host node
 
@@ -405,7 +404,7 @@ these are available in this guide [# Register your machines and assign permissio
     - The Azure policies aren't blocking the creation of certain resource types in a resource group.
     - The Azure policies aren't blocking the resource deployment in certain locations.
 
-Now you can run the script below to register the machine. You need to find a few things in your azure portal.
+Now you can run the script below to register the machine. You need to go need to find a few things in your azure portal.
 
 ## Find your Azure subscription
 
@@ -433,7 +432,7 @@ Follow these steps to retrieve the ID for a Microsoft Entra tenant in the Azure 
     
 5. Copy the **Tenant ID** by selecting the **Copy to clipboard** icon shown next to it. You can paste this value into a text document or other location.
 
-## Create a resource group in a region that supports Azure Local
+Create a resource group in a region that supports Azure Local
 
 To create a resource group in the [Azure portal](https://www.google.com/search?sca_esv=ea7911cd1c52328e&cs=1&q=Azure+portal&sa=X&ved=2ahUKEwj25v-F85CMAxUP4ckDHaRvMbgQxccNegQIAxAB&mstk=AUtExfBJ9AnUmF8cNByWLe3ZvafIRgO49_aYC8A3Dgz4_X4kTBXnoxxulgtmJYffpocE0QGKWPmrQzSl8Jm8fhILTCRp9LAMTS2jrdIKoUgXJc351EM3lsIurtmNNsvhjSj5KkK85u8Ji2MpXzH7SajDXi8PEVgYSM4iSyARu-bJjnxzAO0i0PaRCN2JO4hHgGIhUw1mEpNEzF0_vFZYf2irxgIuf4Vo4qA-AKMxMlciekLBpQ&csui=3), sign in, navigate to "Resource groups," click "+ Create," select your subscription, enter a name and region, then click "Review + create" and "Create". 
 
@@ -457,7 +456,7 @@ Here's a more detailed step-by-step guide:
 	- Click "Review + create" to review the details.
 	- Click "Create" to create the resource group.
 
-## **Azure regions: Azure Local is supported for the following regions:** (I have formatted them to work below)
+**Azure regions: Azure Local is supported for the following regions:** (I have formatted them to work below)
 
 - eastus
 - westeurope
@@ -624,3 +623,4 @@ That is where I'll end this guide. From this point on you know how to add VM ima
 Now that you see how easy it is once everything is set up you can do it on the full blown version as well by acquiring validated hardware from a Microsoft approved OEM vendor [Azure Local Catalogue and sizer](https://azurelocalsolutions.azure.microsoft.com/).
 
 I hope this guide helps, and wish you a good journey in your Azure Local adventures.
+
