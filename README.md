@@ -149,7 +149,7 @@ Follow the guide, do the perquisites...feel free to read it a few times
 
 [Alternative guide](https://www.linkedin.com/pulse/building-my-first-azure-local-aka-stack-hci-cluster-home-pomato-6gdqf/)
 
-## Prepare Active directory
+## Prepare Active Directory
 
 Make sure your AD is ready. I missed this and thought because I had a forest and domain to join I was ready but I wasn't, and if you are new to this like me, you might not be too. 
 
