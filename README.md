@@ -72,7 +72,7 @@ and your router is the DNS server (or it is resolving to one somewhere)
 
 This is important info for later
 
-## Deploy the AD/DNS server
+## Deploy the AD DNS server
 
 On the NAS or some other node external to what will be your cluster start a VM running Windows server.
 
