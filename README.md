@@ -20,7 +20,7 @@
 		- [Add RDP](#setting-up-rdp)
 		- [Set Up Windows Admin Center](#congratulations-you-should-now-be-in-your-cluster-and-in-the-server...now-to-set-up-wac)
 		- [Manage your Cluster in WAC](#finally-to-add-the-cluster)
-- [Is that all Folks?](#is-that-all-folks?)
+- [Is that all Folks?](#is-that-all-folks)
 
 ## Intro
 
