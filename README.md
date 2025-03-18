@@ -14,7 +14,7 @@
 		- [Get your Tenant](#find-your-microsoft-entra-tenant)
 		- [Register the Node](#on-local-node)
 		- [Time to Deploy](#now-you-are-registered-and-ready-to-deploy)
-	- [Now you have a Cluster, lets put it to Work](#now-you-have-an-azure-local-cluster-now-what)?
+	- [Now you have a Cluster, lets put it to Work](#now-you-have-an-azure-local-cluster-now-what)
 		- [Set up Logical Network](#add-a-logical-network-to-your-cluster)
 		- [Your first Azure Local VM](#setting-up-a-windows-server-vm-on-azure-local)
 		- [Add RDP](#setting-up-rdp)
