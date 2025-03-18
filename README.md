@@ -5,7 +5,7 @@
 	- [Know your Local IP information](#know-your-local-ip-information)
 	- [Deploy AD/DNS](#deploy-the-ad-dns-server)
 		- [Set Uniform Time](#set-uniform-time-for-all-machines)
-		- [Prepare Active directory](#prepare-active-directoy)
+		- [Prepare Active directory](#prepare-active-directory)
 	- [Host node and VM node requirements](#make-sure-your-host-node-meets-these-requirements)
 	- [Create and register Nodes](#now-to-run-some-code-to-create-the-vms-for-us-and-register-our-node)
 		- [Create the VM](#on-the-host-node)
