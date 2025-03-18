@@ -2,7 +2,7 @@
 
 - [Introduction](#intro)
 	- [Know your Local IP information](#know-your-local-ip-information)
-	- [Deploy AD/DNS](deploy-the-ad-dns-server)
+	- [Deploy the AD DNS server](deploy-the-ad-dns-server)
 	- [Set Uniform Time](before-you-start,-make-sure-your-host/ad-dns-server/vm-are-all-using-time.windows.com-for-clock-and-not-the-cmos)
 	- Prepare Active directory
 	- Make sure your host node meets these requirements
