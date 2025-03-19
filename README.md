@@ -3,7 +3,7 @@
 
 - [Introduction](#intro)
 	- [Know your Local IP information](#know-your-local-ip-information)
-	- [Create a Virtual Switch](#create-a-virtual-switch-for-ad-dns)
+	- [Create a Virtual Switch](#create-a-virtual-switch)
 	- [Deploy AD/DNS](#deploy-the-ad-dns-server)
 		- [Set Uniform Time](#set-uniform-time-for-all-machines)
 		- [Prepare Active directory](#prepare-active-directory)
