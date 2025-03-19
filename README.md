@@ -1,8 +1,9 @@
-# AzureLocalDemo
+# # AzureLocalDemo
 
 
 - [Introduction](#intro)
 	- [Know your Local IP information](#know-your-local-ip-information)
+	- [Create a Virtual Switch](#create-a-virtual-switch-for-ad-dns)
 	- [Deploy AD/DNS](#deploy-the-ad-dns-server)
 		- [Set Uniform Time](#set-uniform-time-for-all-machines)
 		- [Prepare Active directory](#prepare-active-directory)
@@ -74,6 +75,104 @@ your Default Gateway will be
 and your router is the DNS server (or it is resolving to one somewhere)
 
 This is important info for later
+
+
+
+## Create a Virtual Switch
+
+I am just copying this from Microsoft guide here [# Create and configure a virtual switch with Hyper-V](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines?tabs=hyper-v-manager&pivots=windows) Since they have it spelled out already very nicely. You will also need to do this for the Azure Local host if they are two different machines.
+
+This article shows you how to create and configure your virtual switch using Hyper-V Manager or PowerShell. A virtual switch allows virtual machines created on Hyper-V hosts to communicate with other computers.
+
+#### Prerequisites
+
+Before you can create and configure your virtual switch, your computer must meet the following prerequisites:
+
+- Hyper-V must be enabled
+
+- Virtual switch types are: external, internal. and private. Determine [what type of virtual switch you need to create](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/plan/plan-hyper-v-networking-in-windows-server).
+- Identify which network you connect your computer to. Review the [Core network planning](https://learn.microsoft.com/en-us/windows-server/networking/core-network-guide/core-network-guide#BKMK_planning) article for more information.
+- Have administrative rights.
+
+#### Create a virtual switch
+
+Once you complete the prerequisites, you're ready to create your virtual switch. In this section, we create a basic virtual switch by following these steps.
+
+- [Hyper-V Manager](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines?tabs=hyper-v-manager&pivots=windows#tabpanel_1_hyper-v-manager)
+- [PowerShell](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines?tabs=hyper-v-manager&pivots=windows#tabpanel_1_powershell)
+
+Here's how to create a virtual switch using Hyper-V Manager.
+
+1. Open Hyper-V Manager.
+    
+2. From the **Actions** pane, select **Virtual Switch Manager**.
+    
+3. Choose the type of virtual switch, then select **Create Virtual Switch**.
+    
+4. Enter a name for the virtual switch, then perform one of the following steps.
+    
+    1. If you selected _external_, choose the network adapter (NIC) that you want to use, then select **OK**.
+        
+        You're prompted with a warning that the change may disrupt your network connectivity; select **Yes** if you're happy to continue.
+        
+    2. If you selected _internal_ or _private_, select **OK**.
+        
+
+#### Management Operating System sharing
+
+An external virtual switch allows your virtual machines to connect to an external network. You can also allow the management operating system to share the same selected network adapter. To begin, follow these steps.
+
+- [Hyper-V Manager](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines?tabs=hyper-v-manager&pivots=windows#tabpanel_2_hyper-v-manager)
+- [PowerShell](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines?tabs=hyper-v-manager&pivots=windows#tabpanel_2_powershell)
+
+Here's how to allow the management operating system to share the selected network adapter switch using Hyper-V Manager.
+
+1. Open Hyper-V Manager.
+    
+2. From the **Actions** pane, select **Virtual Switch Manager**.
+    
+3. Select the virtual switch you wish to configure, check the **Allow management operating system to share this network adapter** and select **OK**.
+    
+    You'll be prompted with a warning that the change may disrupt your network connectivity; select **Yes** if you're happy to continue.
+    
+
+#### Virtual LAN (VLAN) identification
+
+You can specify the VLAN identification (ID) used by virtual machines network adapters and virtual switches. For virtual switches connected to either an external or internal network, you can specify the (VLAN) ID. The VLAN ID number is used by the management operating system and virtual machines communicating through this virtual switch.
+
+You can also configure your virtual switch with other VLAN options, such port mode and the native VLAN ID. For these options, you need to use PowerShell and ensure the configuration is compatible with your networks configuration.
+
+To configure the VLAN identification for the switch, follow these steps.
+
+- [Hyper-V Manager](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines?tabs=hyper-v-manager&pivots=windows#tabpanel_3_hyper-v-manager)
+- [PowerShell](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines?tabs=hyper-v-manager&pivots=windows#tabpanel_3_powershell)
+
+Here's how to specify the VLAN ID using the Hyper-V Manager.
+
+1. Open Hyper-V Manager.
+    
+2. From the **Actions** pane, select **Virtual Switch Manager**.
+    
+3. Select the virtual switch you wish to configure, check the **Enable virtual LAN identification for management operating system**.
+    
+    1. You can enter any VLAN ID number or leave the default, then select **OK**.
+        
+        You're prompted to warn you that the change may disrupt your network connectivity, select **Yes** if you're happy to continue.
+        
+
+VLAN identifiers should be consistent with your network to ensure compatibility between your computer, virtual machines, and other network devices.
+
+#### NAT networking
+
+Network Address Translation (NAT) gives a virtual machine access to your computer's network by combining the host computer's IP address with a port through an internal Hyper-V Virtual Switch.
+
+This has a few useful properties:
+
+1. NAT Conserves IP addresses by mapping an external IP address and port to a much larger set of internal IP addresses.
+2. NAT allows multiple virtual machines to host applications that require identical (internal) communication ports by mapping these to unique external ports.
+3. NAT uses an internal switch -- creating an internal switch doesn't cause you to use network connection and tends to interfere less with a computer's networking.
+
+To set up a NAT network and connect it to a virtual machine, follow the [NAT networking user guide](https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/user-guide/setup-nat-network)
 
 
 
@@ -659,8 +758,6 @@ That is where I'll end this guide. From this point on you know how to add VM ima
 Now that you see how easy it is once everything is set up you can do it on the full blown version as well by acquiring validated hardware from a Microsoft approved OEM vendor [Azure Local Catalogue and sizer](https://azurelocalsolutions.azure.microsoft.com/).
 
 I hope this guide helps, and wish you a good journey in your Azure Local adventures.
-
-
 
 
 
